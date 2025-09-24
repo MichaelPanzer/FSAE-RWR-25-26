@@ -15,9 +15,9 @@ def mf61_Fy(x, p, scaling_factors=None, coordinate_system = 'adapted SAE'):
 
     #Scaling Factors
     if scaling_factors is not None:
-        lam_fz0, lam_cx, lam_mux, lam_ex, lam_kx, lam_hx, lam_vx, lam_cy, lam_muy, lam_ey, lam_kyalpha, lam_hy, lam_vy, lam_gay, lam_tr, lam_res, lam_gaz, lam_xal, lam_yka, lam_vyka, lam_s, lam_sgkp, lam_sgal, lam_gyr, lam_kygamma = scaling_factors
+        lam_fz0, lam_cy, lam_muy, lam_ey, lam_kyalpha, lam_hy, lam_vy, lam_kygamma = scaling_factors
     else:
-        lam_fz0 =lam_cx = lam_mux = lam_ex = lam_kx = lam_hx = lam_vx = lam_cy = lam_muy = lam_ey = lam_kyalpha = lam_hy = lam_vy = lam_gay = lam_tr = lam_res = lam_gaz = lam_xal = lam_yka = lam_vyka = lam_s = lam_sgkp = lam_sgal = lam_gyr = lam_kygamma = 1
+        lam_fz0 = lam_cy = lam_muy = lam_ey = lam_kyalpha = lam_hy = lam_vy = lam_kygamma = 1
     
     epsilon = 0.00
 

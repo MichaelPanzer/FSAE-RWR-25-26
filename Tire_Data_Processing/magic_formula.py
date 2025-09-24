@@ -11,7 +11,7 @@ def mf61_Fy(x, p, scaling_factors=None, coordinate_system = 'adapted SAE'):
     The equations below come from Tire and Vehicle Dynamics by Hans Pacejka 
     """
     #Model Parameters
-    p_cy1, p_dy1, p_dy2, p_dy3, p_ey1, p_ey2, p_ey3, p_ey4, p_ey5, p_ky1, p_ky2, p_ky3, p_ky4, p_ky5, p_ky6, p_ky7, p_hy1, p_hy2, p_hy3, p_vy1, p_vy2, p_vy3, p_vy4, p_py1, p_py2, p_py3, p_py4, p_py5, p_i0, f_z0 = p
+    p_cy1, p_dy1, p_dy2, p_dy3, p_ey1, p_ey2, p_ey3, p_ey4, p_ey5, p_ky1, p_ky2, p_ky3, p_ky4, p_ky5, p_ky6, p_ky7, p_hy1, p_hy2, p_vy1, p_vy2, p_vy3, p_vy4, p_py1, p_py2, p_py4, p_py5, p_i0, f_z0 = p
 
     #Scaling Factors
     if scaling_factors is not None:
@@ -19,7 +19,7 @@ def mf61_Fy(x, p, scaling_factors=None, coordinate_system = 'adapted SAE'):
     else:
         lam_fz0 =lam_cx = lam_mux = lam_ex = lam_kx = lam_hx = lam_vx = lam_cy = lam_muy = lam_ey = lam_kyalpha = lam_hy = lam_vy = lam_gay = lam_tr = lam_res = lam_gaz = lam_xal = lam_yka = lam_vyka = lam_s = lam_sgkp = lam_sgal = lam_gyr = lam_kygamma = 1
     
-    epsilon = 0.001
+    epsilon = 0.00
 
 
     #TODO ADD coordinate system transformations
@@ -52,8 +52,7 @@ def mf61_Fy(x, p, scaling_factors=None, coordinate_system = 'adapted SAE'):
     S_vy = F_z*(p_vy1 + p_vy2*dfz)*lam_vy*lam_muy  + S_vygamma# 4.E29
     K_ygamma0 = F_z*(p_ky6 + p_ky7*dfz) * (1 + p_py5*dpi) * lam_kygamma# 4.E30
 
-    #S_hy = (p_hy1 + p_hy2*dfz) * lam_hy + (K_ygamma0*gamma_star-S_vygamma)/(K_yalpha) -1  # 4.E27
-    S_hy     =   (p_hy1 + p_hy2*dfz)*lam_hy +p_hy3*gamma #(4.E27) NOTE I took this bit of code from here Its https://github.com/jmcavalcante/MFPy/blob/main/mfpy/equations.py#L33, its different from the book but it correlates so idk
+    S_hy = (p_hy1 + p_hy2*dfz) * lam_hy + (K_ygamma0*gamma_star-S_vygamma)/K_yalpha  # 4.E27
     alpha_y = alpha + S_hy  # 4.E20
 
     E_y = (p_ey1 + p_ey2*dfz) * (1 + p_ey5*gamma_star**2 - (p_ey3 + p_ey4*gamma_star)*np.sign(alpha_y)) * lam_ey  # 4.E24 (<=1)
